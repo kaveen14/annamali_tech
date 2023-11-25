@@ -1,0 +1,124 @@
+﻿@{
+    ViewBag.Title = "index";
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        .row input {
+            height: 45px;
+        }
+
+        button:hover {
+            background: green;
+            color: white;
+        }
+    </style>
+    <!--   Layout = "~/Views/Home";
+    -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+
+    <script src="/path/to/cdn/jquery.min.js"></script>
+    <script src="/path/to/dist/js/jquery-searchbox.js"></script>
+</head>
+<body>
+    <div class="container" style=" padding:40px; ">
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-4 col-md-3 col-sm-3">
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6" style="background-color: rgba(255,255,255,0.13);
+    border-radius: 100px;
+    border: 2px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 10px rgba(8,7,16,0.6);
+    border-left: 10px solid #386a8b;
+    border-right: 10px solid #386a8b;align-content:center;">
+                <div class="container-fluid" style="text-shadow: 2px 2px ;// text-decoration-line: underline; font-family: Times New Roman, Times, serif; //color: yellow; //background-color: #386a8b; //box-shadow: 0px 0px 30px 0px #888888; //border-radius: 5px; "><center><h3>LOG-IN</h3></center><br></div>
+                <br>
+                <div class="row form-group">
+                    <div class="col-lg-2 col-md-2 col-sm-2">
+                    </div>
+                    <div class="col-lg-9 col-md-8 col-sm-8">
+                        <form>
+                            <span id="response"></span>
+                            <h5> USER ID</h5>   <input type="number" ng-model="input1" name="" id="txtid" class="form-control" placeholder="Ex. 21015"
+                                                       required />
+                            <br>
+                            <h5>PASSWORD</h5><input type="password" ng-model="input2" name="" id="txtpass" class="form-control" placeholder="Ex: password"
+                                                    required />
+                            <br>
+                            <!-- <h5>YEAR</h5><input type="number" name="" id="txtyear" class="form-control" placeholder="FY2016" required />
+                            <br><br>-->
+                            <!--  <h5>YEAR</h5><select name="" id="txtyear" class="form-control"  required>
+
+
+                              </select><br /><br />-->
+
+
+                            <center>   <button type="button" onclick="logincheck()" style="color: yellow; background-color: #386a8b; width: 30%;" value="Submit" id="btn" class="btn btn-primary">Login</button></center>
+                            <u>
+                               
+                                <!--onclick='window.location.href=""'-->
+                            </u>
+                        </form>
+                    </div>
+
+                    <div class="col-lg-1 col-md-2 col-sm-2"></div>
+
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-3 col-sm-3">
+            </div>
+        </div>
+    </div>
+    <script>
+      /*  $(document).ready(function () {
+            List();
+        });
+         function List() {
+             var row = " ";
+             row+=`<option value=" "> Select Year </option>`;
+                    $.ajax({ url: "Url.Action("table_name","Login")", data: null, type: 'GET' }).done(function (res) {
+                        console.log(res+" ");
+                        var result = JSON.parse(res);
+
+                        $.each(result, function (key, value) {
+                            row += `
+                            <option value="`+ value.TABLE_NAME + `">` + value.TABLE_NAME + `</option >`;
+                        });
+                        $('#txtyear').html(row);
+                    });
+                }*/
+        function logincheck() {
+
+           // var dd = { id: $("#txtid").val(), pass: $("#txtpass").val(), year: $("#txtyear").val() };
+            //console.log(dd);
+            $.ajax({
+                url: "@Url.Action("logincheckcon", "login")",
+                data: { id: $("#txtid").val(), pass: $("#txtpass").val() }, type: 'POST'
+            }).done(function (res) {
+                if (res == "Valid") {
+                    alert(res + "ation Successfully");
+                    window.location.href = "@Url.Action("dashboard", "Viewdata")";
+                }
+                else {
+                    alert(res);
+                }
+            }).fail(function (error) {
+                alert("Error or Invalid Move");
+            });
+
+        }
+    </script>
+</body>
+</html>
